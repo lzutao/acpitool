@@ -1,0 +1,218 @@
+.\" acpitool.1 -- 
+.\" Created: Tue Jul 13 2004 by David Leemans
+.\" Copyright 2004  David Leemans (davidleemans |at| scarlet |dot| be)
+.\" 
+.\" Permission is granted to make and distribute verbatim copies of this
+.\" manual provided the copyright notice and this permission notice are
+.\" preserved on all copies.
+.\" 
+.\" Permission is granted to copy and distribute modified versions of this
+.\" manual under the conditions for verbatim copying, provided that the
+.\" entire resulting derived work is distributed under the terms of a
+.\" permission notice identical to this one
+.\" 
+.\" Since the Linux kernel and libraries are constantly changing, this
+.\" manual page may be incorrect or out-of-date.  The author(s) assume no
+.\" responsibility for errors or omissions, or for damages resulting from
+.\" the use of the information contained herein.  The author(s) may not
+.\" have taken the same level of care in the production of this manual,
+.\" which is licensed free of charge, as they might when working
+.\" professionally.
+.\" 
+.\" Formatted or processed versions of this manual, if unaccompanied by
+.\" the source, must acknowledge the copyright and authors of this work.
+.\" 
+.TH ACPITOOL "1" "24 Jul 2008" "AcpiTool 0.5" "User Commands"
+.SH NAME
+acpitool \- a Linux ACPI client, allowing you to query or set ACPI values
+.SH SYNOPSIS
+.B acpitool [ \-aAbBcefFhjlmnosStTvVwWz ]
+.SH DESCRIPTION
+.B acpitool 
+is a Linux ACPI client. It simply reads 
+.I /proc/acpi 
+or 
+.I /sys/class 
+entries and presents the output in a meaningfull, human-readable format.
+.br
+
+It provides a.o. information on battery status, AC adapter presence, thermal reading, etc. This command is
+most useful on laptops with an ACPI compliant BIOS and a Linux kernel, preferably from the 2.6 series, with ACPI enabled.
+.br
+
+.B Acpitool 
+also allows the machine to be put into standby, if your laptop supports it.
+.br
+
+If your laptop is a 
+.B Toshiba
+, it allows you to set the LCD brighness level and toggle the fan on/off. 
+.br
+
+If you have an
+.B Asus
+laptop, it can also set the LCD brightness level, switch the LCD panel on or off, and control the mail led and wireless led.
+
+If you have an
+.B IBM Thinkpad
+laptop, it can once again set the LCD brightness level, and also eject the ultrabay device.
+
+.SH OPTIONS
+.TP
+.B \-a, --ac_adapter  
+Show AC adapter presence
+.TP
+.B \-A  
+Show supported Asus ACPI extensions (LCD brightness level, video out routing DSDT/acpi4asus info)
+.TP
+.B \-b
+Show battery status information, available batteries only.
+.TP
+.B \-B, --battery
+Show detailed battery status information, for all battery entries found.
+.TP
+.B \-c, --cpu
+Show CPU information (type, speed, PM capabilities, throttling states, c-state usage, frequency scaling).
+.TP
+.B \-e
+Show just about everything : more info on the batteries, ACPI version, kernel version, CPU, . . .
+.TP
+.B \-f, --fan
+Show fan status (shows fan info specific to Toshiba or IBM Thinkpad, if applicable).
+.TP
+.B \-F x
+Force the fan on (x=1) or switch back to auto mode (x=0). Works only on Toshiba laptops.
+The fan is switched off ONLY if it was forced on first, not if it was switched on 
+automatically. Requires write access to 
+.I /proc/acpi/toshiba/fan
+.TP
+.B \-h, --help
+Show help text.
+.TP
+.B \-j
+Eject Thinkpad ultrabay device.
+Requires write acces to
+.I /proc/acpi/ibm/bay
+.
+.TP
+.B \-l x
+Set LCD brightness level to x, where x is in the range 0..7. Works only on Toshiba and IBM Thinkpad laptops.
+Requires write access to 
+.I /proc/acpi/tochiba/lcd
+or
+.I /proc/acpi/ibm/brightness
+.
+.br
+Illegal values for x will result in the value being set to either 0 or 7.
+.TP
+.B \-m x
+Switch the mail led on (x=1) or off (x=0). Works only on Asus laptops.
+Requires write access to 
+.I /proc/acpi/asus/mled
+.
+.br
+.TP
+.B \-n x
+Switch the wireless led on (x=1) or off (x=0). Works only on Asus laptops.
+Requires write access to 
+.I /proc/acpi/asus/wled
+.
+.br
+.TP
+.B \-o x
+Switch the LCD panel on (x=1) or off (x=0). Works only on Asus laptops.
+Requires write access to 
+.I /proc/acpi/asus/lcd
+.
+.br
+.TP
+.B \-s, \-\-suspend to memory
+Put the machine into sleep state S3, if possible.
+Requires write access to 
+.I /proc/acpi/sleep 
+(kernel 2.4.x)
+or
+.I /sys/power/state
+(kernel 2.6.x)
+.
+.TP
+.B \-S, \-\-suspend to disk ?
+Put the machine into sleep state S4, if possible.
+Requires write access to 
+.I /proc/acpi/sleep 
+(kernel 2.4.x)
+or
+.I /sys/power/state
+(kernel 2.6.x)
+.
+.TP
+.B \-t, --thermal
+Show thermal zone(s) information, including trip_points.
+.TP
+.B \-T, --Toshiba
+Show supported Toshiba ACPI extensions, currently being LCD brightness level, video out routing (what display
+is the video chip sending to) and fan status (on/off, forced or not). 
+.TP
+.B \-v
+Show more verbose output when something is not found. Makes sense only when used together with other options. 
+.TP
+.B \-V, --version
+Show acpitool version number and release date, then exit. 
+.TP
+.B \-w
+Show the wakeup capable devices. (Available since ACPI 20040715, check your version).  
+.TP
+.B \-W x
+Enable/disable wakeup capable device x. Run 'acpitool -w' to see valid numbers for x.
+Requires write access to 
+.I /proc/acpi/wakeup
+.
+.TP
+.B \-z x
+Set Asus LCD brightness level to x, where x is 0..15. Works only on Asus laptops.
+Requires write access to 
+.I /proc/acpi/asus/brn
+.
+.SH REMARKS
+This program absolutely requires a Linux kernel with ACPI support enabled. This program will not work
+without it. 
+.br
+
+IBM Thinkpad support is part of the Linux kernel since kernel 2.6.10. 
+.br
+
+Don't blame me if
+.B acpitool
+can't suspend your laptop : there are quite some problematic laptops out there. Check the acpi-bugzilla
+list if you don't believe me ;)
+.br
+
+Note that some options, like -F, -l , -j, -s, -W  and -z, require write access to some of the  
+.I /proc/acpi
+entries. This requires 
+.B acpitool
+either to be run as
+.B root
+or either administrative measures must be taken, most likely by root, to allow ordinary users to write
+to these files. Creating a group for ACPI users and setting permissions accordingly comes to mind.
+.br
+
+Also note that older laptops (< 2000) often simply don't have ACPI support, they usually support APM only.
+.SH BUGS
+Let me know if you think you found one.
+.SH FILES
+.I /proc/acpi/...
+.br
+.I /proc/acpi/toshiba
+.br
+.I /proc/acpi/asus
+.br
+.I /proc/acpi/ibm
+.br
+.I /sys/power/state
+.SH HOMEPAGE
+http://freeunix.dyndns.org:8000/site2/acpitool.shtml
+.SH AUTHOR
+This program is written and maintained by David Leemans (davidleemans |at| scarlet |dot| be) and may be freely
+distributed under the terms of the GNU General Public License.  There is
+ABSOLUTELY NO WARRANTY for this program. 

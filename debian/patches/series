@@ -1,0 +1,6 @@
+ac_adapter.patch
+battery.patch
+kernel3.patch
+wakeup.patch
+0001-Do-not-assume-fixed-line-lengths-for-proc-acpi-wakeu.patch
+typos.patch

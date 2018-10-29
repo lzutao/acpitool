@@ -1,0 +1,24 @@
+programming : David Leemans <davidleemans |AT| tiscali |DOT| be>
+
+I would like to thank the following people for their aid in the development
+of AcpiTool by means of testing, feedback, contributions, . . . :
+	
+ - Jeremy Janssens <http://www.gnu-linux.net/> : initial testing of acpitool on his Fujitsu laptop
+ 
+ - Giuseppe Della Ricca : provided extensive feedback and patches for problems, occuring on his Dell laptop,
+   that are addressed in AcpiTool 0.2.3
+ 
+ - Christopher A. Ghalon : provided feedback on failure to report battery status, on yet another Dell laptop
+ 
+ - Jiri Tyr : provided feedback on failure to report battery status
+ 
+ - Narayan Desai (mcs.anl.gov) : added initial support for IBM Thinkpad ACPI driver
+
+ - Nicolas Weyland (ufoalien) : added initial support for Asus ACPI extensions.
+ 
+ - Niko Ehrenfeuchter (University of Freiburg, Germany) : integration of c-state statistics
+
+ - Erwan <erwan@seanodes.com> (Mandriva package maintainer): fixing includes needed for gcc 4.3.
+ 
+ - Sergei Trofimovich: removing limit on number of thermal zones, fixing memory leaks and adding asserts     
+	  

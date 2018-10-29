@@ -1,0 +1,51 @@
+
+------------------------------------------------------------------------------
+            		A C P I T O O L
+------------------------------------------------------------------------------
+
+    - This is an ACPI client for Linux, written by David Leemans.
+    Copyright (C) 2004, 2005, 2006, 2007, 2008  David Leemans. Please see 
+    the INSTALL file for installation info.
+
+    - See the homepage for this software: 
+    http://freeunix.dyndns.org:8000/site/acpitool.shtml
+    for more information and download link.
+
+    - This ACPI client is intended to be a replacement for the apm tool.
+    Even though APM works fine on a lot of laptops, it is deprecated
+    and will be replaced by ACPI. Most newer laptops even require ACPI
+    to boot properly. As such, it will be nice to have an ACPI client.
+ 
+    - Obviously, you need a computer running a Linux kernel from the
+    2.4.x or 2.6.x series with ACPI enabled, to use this program.
+    A kernel from the 2.6 series is recommended, since that's where
+    development of Linux ACPI code is going on.
+    Intended audience of this applictaion are laptop users, since these are 
+    the people most interested in stuff like battery status, thermal status and
+    the ability to put their precious laptop to sleep. Most of this does not
+    apply to desktop systems. 
+
+    - WARNING : Linux ACPI support MIGHT work fine, as it does on my laptop, 
+    might work, but with annoying problems or in a limited way, or might not work
+    at all. See the "view existing bug reports" link on http://acpi.sourceforge.net/
+    to get an idea of what can go wrong.     
+
+    - Development of Acpitool started in June 2004, on a Toshiba Satellite Pro 6000, 
+    then running Slackware 9.1. The Toshiba remained in use till September 2006, 
+    when it was replaced with a Dell Latitude C640, currently running Slackware 11 
+    with kernel 2.6.20. 
+    The C640 was replaced in July 2008 with a Dell Latitude D610, curently running 
+    Slackware 12.1 with kernel 2.6.26.
+
+    - If you think you found a bug, have a feature request, would like to give some
+    feedback, or just would like to contact me for whatever reason, DO NOT HESITATE
+    to do so. 
+    It is the only way I will ever know there is a bug, or that you want some 
+    feature added. With your much appreciated help, Acpitool can only get better ;) 
+    
+    - To contact me, send mail to davidleemans AT scarlet DOT be or fill in the form
+    at http://freeunix.dyndns.org:8000/site/contact.shtml
+    
+    - Last updated: 24-Jul-2008
+ 
+-------------------------------------------------------------------------------

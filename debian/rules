@@ -1,0 +1,21 @@
+#!/usr/bin/make -f
+
+%:
+	dh ${@} --with quilt
+
+override_dh_auto_clean:
+	dh_auto_clean
+
+	rm -f config.guess config.sub
+
+override_dh_auto_configure:
+	cp -f /usr/share/misc/config.guess .
+	cp -f /usr/share/misc/config.sub .
+
+	dh_auto_configure
+
+override_dh_auto_install:
+	$(MAKE) DESTDIR=$(CURDIR)/debian/acpitool install
+
+override_dh_strip:
+	dh_strip --dbg-package=acpitool-dbg

@@ -1,0 +1,297 @@
+acpitool-0.5.1 - 13-08-2008
+
+  * toshiba.cpp, freq.cpp:
+    
+	- add  #include <string.h>:  needed for gcc 4.3.1, reported by Erwan <erwan@seanodes.com>, Mandriva
+	package maintainer.
+	- merge various fixes provided by Sergei Trofimovich: removing limit on number of thermal zones,
+	fixing memory leaks and adding asserts     
+	
+
+
+acpitool-0.5.0 - 24/07/2008
+
+  * 1st version of acpitool that's compatible with kernel >= 2.6.24 : in 2.6.24, the information
+    about batteries and AC adapter is moved from /proc/acpi to /sys/class/powersupply. You can still
+    have everything in /proc, but in the future, this will dissapear.
+    If acpitool finds the information in /proc, it will use that, just like before. Otherwise, it will 
+    look in /sys/class/... and use that information if found.
+    
+  * The acpitool -B option is not quite ready yet, but most of it works ;)     
+
+  * all/most .cpp files:
+	
+	- add #include <cstdlib> and <cstring>, 
+	- replace bzero with memset
+	to avoid compilation  problems on gcc 4.3. Thanks to Martin Michlmayr (http://www.cyrius.com/) and
+	Patrice Dumas (Fedora package maintainer) for reporting this.  
+  
+  * new files: ac_adapter.cpp , ac_adapter.h
+	
+	- split off from acpitool.cpp to keep things manageable
+	
+
+acpitool-0.4.7 - 06/02/2007
+
+  * new files: battery.cpp, battery.h, cpu.cpp, cpu.h
+	
+	- split off from acpitool.cpp to keep things manageable 
+  
+  * cpu.cpp:
+  
+	- Add support for frequency scaling. CPU info shows current speed, available speeds, governor and driver.  
+
+
+
+acpitool-0.4.6 - 09/08/2006
+
+  * acpitool.cpp : 
+	
+	- CPU info : 
+	    * fix output for Bogomips and C-state usage for everything that looks like an SMP system (Intel Core Duo,
+	      Pentium 4 with HyperThreading, AMD Opteron, . . .). 
+	      Thanks to John Stembridge (University of Michigan, USA) for reporting this error.
+
+
+acpitool-0.4.5 - 14/02/2006
+
+  * acpitool.cpp : 
+	
+	- CPU info : 
+	    * fixed output for Bogomips (again) for AMD64 cpu's (well, at least the 3500+).
+	    * added cache size information
+	    
+	- fixed bug causing acpitool to enter an infinite loop when trying to display c-state usage
+	  for AMD64 3500+ cpu. This should also fix the "0 (nan %)" output seen on cpu's reporting 00000000 usage
+	  for just 1 C-state (C1). Reported by Samuele Kaplun.
+
+
+acpitool-0.4.4 - 05/02/2006
+
+  * acpitool.cpp : 
+	
+	- fixed "bug" where total battery runtime is calculated even if AC is online (but 1 battery is charging).
+	It doesn't really make sense to calculate runtime if AC is online. Bug reported by Markus Melms.
+	I should have tested this somewhat better.
+ 
+
+acpitool-0.4.3 - 29/01/2006
+
+  * acpitool.cpp : 
+	
+	- if 2 batteries are installed, total battery time left is also calculated (estimation based on
+	discharging rate of the battery in use). This was a feature request by Markus Melms (Germany).
+  
+
+acpitool-0.4.2 - 19/01/2006
+
+  * main.cpp :
+	- moved argument parsing from getopt to getopt_long. This allows the use of long options,
+	you know, stuff like --version, or --help. This should make acpitool somewhat more idiot-proof
+	(some people were very wondered about "acpitool --version" not doing what they expected :).
+	So, while I was at it, I implemented the next long options:
+	--version, --help, --battery, --Toshiba, --Asus, --wakeup, --cpu, --thermal, --fan
+	
+  
+acpitool-0.4.2 - 18/01/2006
+
+  * acpitool.cpp : 
+	
+	- received a patch from Niko Ehrenfeuchter (University of Freiburg, Germany), which integrates
+	c-state statistics in acpitool (-c option). It allows you to see the usage of the c-states supported
+	by your machine. Very nice patch. He even made the effort of reformatting the indentation nicely :)
+
+  
+acpitool-0.4.1 - 08/01/2006
+
+  * acpitool.cpp : 
+	
+	- acpitool segfaulted when it found number of thermal zones > 3. Raised to 5 thermal zones now.
+	Unfortunately, the person filing the bugreport, did not provide any feedback to confirm this fix.
+	I am pretty confident however the fix is OK. If not, let me know.
+ 	
+
+acpitool-0.4.0 - 31/10/2005
+
+  * thinkpad.cpp, thinkpad.h : 
+	
+	- added initial support for IBM Thinkpad ACPI driver, provided by Narayan Desai (mcs.anl.gov).
+	Many thanks to Narayan for providing  valuable information, testing and adding code to the project.
+
+  * main.cpp :
+	
+	- new option added (-j) :  eject Thinkpad ultrabay device
+	- adapted -l option : now integrates setting  brightness level on Toshiba and Thinkpad laptops
+	- adapted -f option : now integrates Toshiba and Thinkpad fan support
+	     
+	
+
+acpitool-0.3.0 - 23/10/2005 
+
+  * acpitool.cpp :
+  	
+  	- CPU info : fixed output for Bogomips and PM capabilities for CPU with very long flags information
+	  Many thanks to Giuseppe Della Ricca (once again) for reporting and fixing this bug.
+	
+  * asus.cpp : 
+
+	- added initial support for Asus ACPI extensions. Many thanks to "ufoalien" (Nicolas Weyland) for providing
+	  valuable information, testing and adding code to the project.
+  
+  * main.cpp :
+	
+	- 5 new options added (-A, -m, -n , -o , -z), all related to the Asus ACPI driver.
+  
+  * some more minor code cleanups
+  
+
+acpitool-0.2.8 - 06/10/2005 
+
+  * acpitool.cpp :
+  	
+  	- CPU info : added Bogomips (I know, totally useless, but nevertheless cool ;)
+	    
+	- battery : when battery is charging, calculate time as time needed untill battery is charged
+	
+	- the -e option now also shows CPU and wakeup capable devices information 
+	
+  * main.cpp : 
+
+	- added a -v option, gives more verbose output when something is not found. Note that
+	  the -v option only makes sense when used in conjunction with other options.
+	
+	- Version information is now given by the -V option
+  
+  * minor code cleanups in most files	
+  
+
+acpitool-0.2.7 - 03/03/2005 
+
+  * acpitool.cpp :
+  	
+  	- from Jeremy "Mad Lunatic" Janssens (Belgium) : thermal zone information displayed
+	  some weird garbish for the 2nd thernal zone of his Fujitsu laptop. Turned out to
+	  be an error in the looping code which caused interpretation of the wrong files
+	  for the 2nd thermal zone. Is fixed now.
+	  
+	- battery : capacity loss is displayed only if there do is any capacity loss.
+
+
+acpitool-0.2.7b2 - 24/01/2005 
+
+  * acpitool.cpp :
+  	
+  	- from Patrick "Padde" (Germany) : description for the -F option was not entirely correct,
+	  that is, -F1 forces the fan on, but -F0 only switches it off IF it was forced on first,
+	  not if was switched on by auto mode. Help text is adapted to reflect this. He also
+	  noted that acpitool works perfectly on his Toshiba Satellite A50, running Gentoo.
+
+
+acpitool-0.2.7b1 - 13/01/2005 
+
+  * acpitool.cpp :
+  	
+  	- from Alan Pope (UK) : the batteries of his Dell laptop report a remaining capacity higher
+	  than their last full capacity or their design capacity !
+	  This lead acpitool to report funny stuff like 107% battery percentage. To avoid
+	  this silliness, remaining percentage will be "capped" to 100% if calculation
+	  yields a value > 100%.  
+	  Making the calculation with the higher remaining capacity as the last full capacity would
+	  be better, but is impractical since there is no way of "knowing" what the highest remaining
+	  capacity was. Dell would better start using decent batteries . . .
+ 
+
+acpitool-0.2.7b1 - 15/12/2004
+
+  * acpitool.cpp :
+  	
+  	- more meaningfull error message for Toggle_Wakeup_Device if user has insufficient
+	  permissions on /proc/acpi/wakeup 
+
+
+acpitool-0.2.6 - 28/11/2004 
+
+  * added support for trip_points information (ro), shown with option -t.
+  
+  * added calculation of battery capacity loss, it is computed as the difference between
+    the design capacity and the last full capacity of a battery. If you think this is
+    wrong, let me know.
+    
+  * extended CPU information option (option -c) : now also reports power throttling status,
+    if the CPU has throttling support.
+  
+
+acpitool-0.2.5 - 13/09/2004 
+
+  * added initial support for CPU information : type, speed, PM capabilities.
+  
+  
+acpitool-0.2.4 - 31/08/2004 
+
+  * added support for enabling/disabling wakeup devices
+  
+  * we now use autoconf/automake for compiling, building and installation. 
+  
+  * for all you RPM lovers out there, I included acpitool.spec, generously contributed by Robert Ambrose.  
+
+
+acpitool-0.2.3 - 22/08/2004 
+
+  * acpitool.cpp : 
+
+    - fixed really stupid bug that prevented battery status to be calculated if only 1 entry
+      is found in /proc/acpi/battery (logical error of mine, mea culpa)
+
+    - Do_Fan_Info function rewritten to enumerate all possible entries
+      in /proc/acpi/fan, like was done already for AC, THRM and batteries.
+
+    - cleaned up unused and/or uninitialised variables
+
+    - battery Model_Number and Serial are shown only if non-empty values are found since
+      not all batteries seem to report these
+
+    - when charging state returns "unknown", report it as "charged" (happens on older kernels)
+
+    - a battery is now considered to be absent if it reports it's last full capacity as "unknown" 
+      (solves a quirk on some Dell laptops that report a 2nd battery as present when there obviously
+       isn't one. All values for this battery are then however reported as "unknown").
+
+    - if battery is charged, and present rate returns "unknown", then report 0 for the present rate  
+      
+  * main.cpp : added #include <unistd.h>, on some systems, this is needed to declare 
+    the getopt function. Without it, compilation breaks on these systems.
+  
+  * Makefile : added -Wall to compile flags, it catches a lot of warnings  
+
+
+acpitool-0.2.2 - 20/08/2004 
+
+  * Added support (ro) for wakeup capable devices. Currently available in the 
+    ACPI patch for kernel 2.6.8 (ACPI version 20040715).
+
+
+acpitool-0.2.1 - 04/08/2004 
+
+  * Use Toshiba_Fan function for fan info if Toshiba ACPI is available.
+
+
+acpitool-0.2.1 - 15/07/2004 
+
+  * Added support for fan control to the Toshiba ACPI extensions.
+  
+  * Updated the manpage.
+  
+  * Fixed a few embarassing typos.
+
+
+acpitool-0.2 - 13/07/2004 
+
+  * Added initial support for Toshiba ACPI extensions.
+  
+  * Added a manpage.
+
+
+acpitool-0.1 - 05/06/2004
+
+  * Initial Release.
+

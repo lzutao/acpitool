@@ -1,0 +1,38 @@
+Source: acpitool
+Section: utils
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Debian Acpi Team <pkg-acpi-devel@lists.alioth.debian.org>
+Uploaders: Michael Meskes <meskes@debian.org>
+Build-Depends: debhelper (>= 7.0.50~), autotools-dev, quilt (>= 0.46-7~)
+Standards-Version: 3.9.6
+Homepage: http://sourceforge.net/projects/acpitool/ 
+
+Package: acpitool
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}
+Recommends: acpid [amd64 i386 ia64]
+Description: command line ACPI client
+ AcpiTool is a Linux ACPI client. It's a small command line application,
+ intended to be a replacement for the apm tool. The primary target audience are
+ laptop users, since these people are most interested in things like battery
+ status, thermal status and the ability to suspend (sleep mode). The program
+ simply accesses the /proc/acpi or /sysfs entries to get or set ACPI values.
+ It also supports various extensions for Toshiba, Asus, and IBM Thinkpad
+ laptops.
+
+Package: acpitool-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: ${misc:Depends}, acpitool (= ${binary:Version})
+Description: command line ACPI client (debug)
+ AcpiTool is a Linux ACPI client. It's a small command line application,
+ intended to be a replacement for the apm tool. The primary target audience are
+ laptop users, since these people are most interested in things like battery
+ status, thermal status and the ability to suspend (sleep mode). The program
+ simply accesses the /proc/acpi or /sysfs entries to get or set ACPI values.
+ It also supports various extensions for Toshiba, Asus, and IBM Thinkpad
+ laptops.
+ .
+ This package contains the debugging symbols.

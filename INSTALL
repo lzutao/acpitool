@@ -1,0 +1,63 @@
+Installation requirements
+=========================
+ 
+    1. A computer(laptop) running a fairly recent Linux distro, preferably with a kernel from the 2.6 series. 
+  
+    2. That kernel MUST have ACPI support enabled and /proc file support. Sysfs support
+       is required for a kernel from the 2.6 series (not for 2.4).
+       
+       
+       For ACPI, enable all options applicable to your system. You should enable at least the following:
+       
+       - sleep states
+       - processor
+       - button
+       - thermal zone
+       - battery
+       - ac adapter
+       - fan
+       
+    3. If you have a Toshiba laptop, you can enable kernel support the Toshiba ACPI extensions.
+  
+    4. If you have an Asus laptop, you can enable kernel support the ASUS ACPI extensions.
+   
+    5. a C++ compiler (gcc-g++ is fine, it worked for me anyway).
+  
+    6. If you have a pretty recent laptop, check out if supports frequency scaling, and enable 
+       kernel support for it if it does.
+     
+    7. GNU Make 
+  
+
+Basic Installation
+==================
+
+    The simplest way to compile this package is:
+
+    1. `cd' to the directory containing the package's source code and type
+       `sh configure'. When that's done, type `make' to compile the package.
+
+    2. Type `make install' to install the program and any data files and documentation.
+
+    3. You can remove the program binaries and object files from the source code directory
+       by typing `make clean'.  To remove the installed files that `make install' created,
+       type `make uninstall'.
+    
+    4. You can set the CXXFLAGS environment variable to define compile options.  
+
+
+Installation Names
+==================
+
+    By default, `make install' will install the package's files in `/usr/local/bin'. 
+    You can edit the Makefile and specify an installation prefix other than `/usr/local'.
+
+
+How to use it
+=============
+
+    Acpitool is a CLI application, that means it has no fancy GUI with buttons or other crap.
+    So, just type "acpitool", without the quotes, at your shell prompt and you should get some text output.
+    If you want to find out which arguments it can handle, type "acpitool --help".
+    
+    

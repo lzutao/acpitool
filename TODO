@@ -1,0 +1,22 @@
+Todo list for acpitool:
+ 
+ - maybe add APM support after all, to make it a "complete" pm tool
+
+ 
+Done :
+
+ - add support for Toshiba ACPI extensions (since 0.2)
+ 
+ - write a man page (since 0.2)
+ 
+ - use autoconf/automake to build the application (since 0.2.4)
+
+ - add support to enable/disable wakeup devices (since 0.2.4)
+ 
+ - add support for Asus laptop extras (since 0.3.0)
+ 
+ - add support for IBM Thinkpad ACPI driver (since 0.4.0)
+ 
+ - add support for frequency scaling (since 0.4.7)
+
+ 
